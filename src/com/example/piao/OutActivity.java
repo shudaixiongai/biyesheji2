@@ -11,21 +11,24 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class OutActivity extends Activity {
 	private ListView out_listView;
-	List<InBeen> lists = new ArrayList<InBeen>();;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,15 +44,21 @@ public class OutActivity extends Activity {
 
 			@Override
 			public void onSuccess(List<InBeen> arg0) {
-				for (int i = 0; i < arg0.size(); i++) {
-					lists = arg0;
-					Log.v("333", lists.get(i).getTitle());
-					// arg0.get(i).getTitle()
-					// Toast.makeText(OutActivity.this, arg0.get(i).getTitle(),
-					// 1)
-					// .show();
-					// Log.v("111", arg0.get(i).getTitle());
-				}
+				List<InBeen> lists = arg0;
+				out_listView.setAdapter(new adapter(getApplicationContext(),
+						lists));
+				out_listView.setOnItemClickListener(new OnItemClickListener() {
+
+					@Override
+					public void onItemClick(AdapterView<?> arg0, View arg1,
+							int arg2, long arg3) {
+						Intent intent = new Intent();
+						intent.setClass(getApplicationContext(),
+								DetailsActivity.class);
+						startActivity(intent);
+
+					}
+				});
 			}
 
 			@Override
@@ -63,8 +72,7 @@ public class OutActivity extends Activity {
 	private void setview() {
 		out_listView = (ListView) findViewById(R.id.out_listview);
 		Queryout();
-		Log.v("66", String.valueOf(lists.size()));
-		out_listView.setAdapter(new adapter(this, lists));
+		// Log.v("66", String.valueOf(lists.size()));
 	}
 
 	class adapter extends BaseAdapter {
@@ -78,7 +86,7 @@ public class OutActivity extends Activity {
 
 		@Override
 		public int getCount() {
-			return 10;
+			return minBeens.size();
 		}
 
 		@Override
@@ -88,7 +96,7 @@ public class OutActivity extends Activity {
 
 		@Override
 		public long getItemId(int arg0) {
-			return 0;
+			return arg0;
 		}
 
 		@Override
@@ -113,12 +121,9 @@ public class OutActivity extends Activity {
 			// String title = lists.get(i).getTitle();
 			// Log.i("lists.gettitle", title);
 			// }
-			// String title = lists.get(arg0).getTitle();
-			// viewholder.content.setText(title);
+			String title = minBeens.get(arg0).getTitle();
+			viewholder.content.setText(title);
 			// viewholder.iv_title.setBackgroundDrawable(drawable.ic_launcher);
-			viewholder.username.setText("2");
-			viewholder.password.setText("3");
-			viewholder.content.setText("1");
 			return arg1;
 		}
 	}

@@ -24,7 +24,6 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		Bmob.initialize(this, APP_ID);
-
 		setView();
 	}
 
