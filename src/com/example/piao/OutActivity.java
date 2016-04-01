@@ -37,7 +37,7 @@ public class OutActivity extends Activity {
 		setview();
 	}
 
-	private void Queryout() {
+	private  void Queryout() {
 		BmobQuery<InBeen> query = new BmobQuery<>();
 		query.order("-createdAt");
 		query.findObjects(this, new FindListener<InBeen>() {
