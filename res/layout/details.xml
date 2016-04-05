@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:gravity="left"
-            android:text="%52" />
+            />
     </RelativeLayout>
 
     <ProgressBar
@@ -100,7 +100,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="%52" />
+            />
     </RelativeLayout>
 
     <ProgressBar
@@ -127,7 +127,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="%52" />
+         />
     </RelativeLayout>
 
     <ProgressBar

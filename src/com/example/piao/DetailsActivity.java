@@ -77,6 +77,13 @@ public class DetailsActivity extends Activity {
 					@Override
 					public void onClick(View arg0) {
 						pb_option1.setProgress(10);
+						int sum = 1;
+						if (sum == 1) {
+							tv_detail_sum1.setText(String.valueOf(sum));
+						} else {
+							tv_detail_sum1.setText(String.valueOf(sum + 1));
+						}
+
 					}
 				});
 			}
