@@ -1,10 +1,11 @@
 package com.example.been;
 
+import java.io.Serializable;
 import java.util.List;
 
 import cn.bmob.v3.BmobObject;
 
-public class InBeen extends BmobObject {
+public class InBeen extends BmobObject implements Serializable{
 	private String title;
 	private String option_one;
 	private String option_two;

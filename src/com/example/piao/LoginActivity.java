@@ -2,6 +2,7 @@ package com.example.piao;
 
 import java.util.List;
 
+import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
@@ -29,12 +30,14 @@ public class LoginActivity extends Activity {
 			register_psd2;
 	private ImageView iv_login;
 	private Button bt_login_top, bt_register_top, bt_login, bt_register;
+	public static final String APP_ID = "98b20fe235f525721eb0f46a14c64f03";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
+		Bmob.initialize(this, APP_ID);
 		setview();
 	}
 
@@ -74,7 +77,7 @@ public class LoginActivity extends Activity {
 				register.setRegister_name(et_register_name);
 				register.setRegister_psd(et_register_psd);
 				register.setRegister_psd2(et_register_psd2);
-				register.save(getApplicationContext(), new SaveListener() {
+				register.save(LoginActivity.this, new SaveListener() {
 
 					@Override
 					public void onSuccess() {

@@ -1,9 +1,12 @@
 package com.example.piao;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bmob.btp.e.a.in;
 import com.example.been.InBeen;
+import com.example.been.Register;
 import com.example.piao.R.drawable;
 import com.example.piao.R.layout;
 
@@ -29,6 +32,7 @@ import android.widget.Toast;
 
 public class OutActivity extends Activity {
 	private ListView out_listView;
+	int int1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,14 +41,14 @@ public class OutActivity extends Activity {
 		setview();
 	}
 
-	private  void Queryout() {
+	private void Queryout() {
 		BmobQuery<InBeen> query = new BmobQuery<>();
 		query.order("-createdAt");
 		query.findObjects(this, new FindListener<InBeen>() {
 
 			@Override
 			public void onSuccess(List<InBeen> arg0) {
-				List<InBeen> lists = arg0;
+				final List<InBeen> lists = arg0;
 				out_listView.setAdapter(new adapter(getApplicationContext(),
 						lists));
 				out_listView.setOnItemClickListener(new OnItemClickListener() {
@@ -52,11 +56,19 @@ public class OutActivity extends Activity {
 					@Override
 					public void onItemClick(AdapterView<?> arg0, View arg1,
 							int arg2, long arg3) {
-						Intent intent = new Intent();
-						intent.setClass(getApplicationContext(),
+						Register register = new Register();
+						// if
+						// (lists.get(arg2).equals(register.getRegister_name()))
+						// {
+						Intent intent = new Intent(OutActivity.this,
 								DetailsActivity.class);
-						startActivity(intent);
-
+						Bundle bundle = new Bundle();
+						bundle.putInt("postion", arg2);
+						intent.putExtra("list", (Serializable) lists);
+						bundle.putInt("intent", int1);
+						intent.putExtras(bundle);
+						startActivityForResult(intent, 1);
+						// }
 					}
 				});
 			}
@@ -67,6 +79,13 @@ public class OutActivity extends Activity {
 			}
 		});
 
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		int1 = data.getExtras().getInt("result");
 	}
 
 	private void setview() {
