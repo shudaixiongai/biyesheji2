@@ -32,7 +32,9 @@ import android.widget.Toast;
 
 public class OutActivity extends Activity {
 	private ListView out_listView;
-	int int1;
+	int int1, int2, int3;
+	int sum, sum2, sum3;
+	private static final int REQUESTCODE = 1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +67,13 @@ public class OutActivity extends Activity {
 						Bundle bundle = new Bundle();
 						bundle.putInt("postion", arg2);
 						intent.putExtra("list", (Serializable) lists);
-						bundle.putInt("intent", int1);
+						intent.putExtra("intent", int1);
+						intent.putExtra("intent2", int2);
+						intent.putExtra("intent3", int3);
+						intent.putExtra("sum", sum);
+						Log.v("第一个activity的int值", String.valueOf(int1));
 						intent.putExtras(bundle);
-						startActivityForResult(intent, 1);
+						startActivityForResult(intent, REQUESTCODE);
 						// }
 					}
 				});
@@ -83,9 +89,19 @@ public class OutActivity extends Activity {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub super.onActivityResult(requestCode,
+		// resultCode, data);
 		super.onActivityResult(requestCode, resultCode, data);
-		int1 = data.getExtras().getInt("result");
+		if (resultCode == 2) {
+			Log.i("resultcode", String.valueOf(requestCode + resultCode));
+			if (requestCode == REQUESTCODE) {
+				int1 = data.getIntExtra("back", 0);
+				int2 = data.getIntExtra("back2", 0);
+				int3 = data.getIntExtra("back3", 0);
+				sum = data.getIntExtra("sum", 0);
+				Log.i("back", String.valueOf(int1));
+			}
+		}
 	}
 
 	private void setview() {
