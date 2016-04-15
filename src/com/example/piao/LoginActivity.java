@@ -15,12 +15,15 @@ import com.example.piao.OutActivity.adapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
@@ -28,14 +31,19 @@ import android.widget.AdapterView.OnItemClickListener;
 public class LoginActivity extends Activity {
 	private EditText login_name, login_psd, register_name, register_psd,
 			register_psd2;
-	private ImageView iv_login;
-	private Button bt_login_top, bt_register_top, bt_login, bt_register;
+	private ImageView iv_login, iv_re_name, iv_re_psd, iv_re_psd2, iv_lo_name,
+			iv_lo_psd;
+	private Button bt_login, bt_register;
+	private TextView tv_login_top, tv_register_top;
 	public static final String APP_ID = "98b20fe235f525721eb0f46a14c64f03";
+	private LinearLayout ll_re_name, ll_re_psd, ll_re_psd2, ll_lo_name,
+			ll_lo_psd;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);// 去掉标题栏
 		setContentView(R.layout.login);
 		Bmob.initialize(this, APP_ID);
 		setview();
@@ -47,12 +55,21 @@ public class LoginActivity extends Activity {
 		register_name = (EditText) findViewById(R.id.et_register_name);
 		register_psd = (EditText) findViewById(R.id.et_register_psd);
 		register_psd2 = (EditText) findViewById(R.id.et_register_psd2);
-		iv_login = (ImageView) findViewById(R.id.iv_login);
 		bt_login = (Button) findViewById(R.id.bt_login);
-		bt_login_top = (Button) findViewById(R.id.bt_login_name);
-		bt_register_top = (Button) findViewById(R.id.bt_register_name);
+		ll_re_name = (LinearLayout) findViewById(R.id.ll_re_name);
+		ll_re_psd = (LinearLayout) findViewById(R.id.ll_re_psd);
+		ll_re_psd2 = (LinearLayout) findViewById(R.id.ll_re_psd2);
+		iv_re_name = (ImageView) findViewById(R.id.iv_re_name);
+		iv_re_psd = (ImageView) findViewById(R.id.iv_re_psd);
+		iv_re_psd2 = (ImageView) findViewById(R.id.iv_re_psd2);
+		tv_login_top = (TextView) findViewById(R.id.bt_login_name);
+		tv_register_top = (TextView) findViewById(R.id.bt_register_name);
 		bt_register = (Button) findViewById(R.id.bt_register);
-		bt_register_top.setOnClickListener(new OnClickListener() {
+		iv_lo_name = (ImageView) findViewById(R.id.iv_lo_name);
+		iv_lo_psd = (ImageView) findViewById(R.id.iv_lo_psd);
+		ll_lo_name = (LinearLayout) findViewById(R.id.ll_lo_name);
+		ll_lo_psd = (LinearLayout) findViewById(R.id.ll_lo_psd);
+		tv_register_top.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
@@ -63,7 +80,16 @@ public class LoginActivity extends Activity {
 				register_psd.setVisibility(View.VISIBLE);
 				register_psd2.setVisibility(View.VISIBLE);
 				bt_register.setVisibility(View.VISIBLE);
-
+				ll_re_name.setVisibility(View.VISIBLE);
+				ll_re_psd.setVisibility(View.VISIBLE);
+				ll_re_psd2.setVisibility(View.VISIBLE);
+				iv_re_name.setVisibility(View.VISIBLE);
+				iv_re_psd.setVisibility(View.VISIBLE);
+				iv_re_psd2.setVisibility(View.VISIBLE);
+				ll_lo_name.setVisibility(View.GONE);
+				ll_lo_psd.setVisibility(View.GONE);
+				iv_lo_name.setVisibility(View.GONE);
+				iv_lo_psd.setVisibility(View.GONE);
 			}
 		});
 		bt_register.setOnClickListener(new OnClickListener() {
@@ -73,6 +99,12 @@ public class LoginActivity extends Activity {
 				String et_register_name = register_name.getText().toString();
 				String et_register_psd = register_psd.getText().toString();
 				String et_register_psd2 = register_psd2.getText().toString();
+				if (TextUtils.isEmpty(et_register_name)
+						&& TextUtils.isEmpty(et_register_psd)
+						&& TextUtils.isEmpty(et_register_psd2)) {
+					Toast.makeText(getApplicationContext(), "用户名和密码不能为空！！！", 1)
+							.show();
+				}
 				Register register = new Register();
 				register.setRegister_name(et_register_name);
 				register.setRegister_psd(et_register_psd);
@@ -93,17 +125,27 @@ public class LoginActivity extends Activity {
 				});
 			}
 		});
-		bt_login_top.setOnClickListener(new OnClickListener() {
+		tv_login_top.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
 				login_name.setVisibility(View.VISIBLE);
 				login_psd.setVisibility(View.VISIBLE);
 				bt_login.setVisibility(View.VISIBLE);
+				ll_lo_name.setVisibility(View.VISIBLE);
+				ll_lo_psd.setVisibility(View.VISIBLE);
+				iv_lo_name.setVisibility(View.VISIBLE);
+				iv_lo_psd.setVisibility(View.VISIBLE);
 				register_name.setVisibility(View.GONE);
 				register_psd.setVisibility(View.GONE);
 				register_psd2.setVisibility(View.GONE);
 				bt_register.setVisibility(View.GONE);
+				ll_re_name.setVisibility(View.GONE);
+				ll_re_psd.setVisibility(View.GONE);
+				ll_re_psd2.setVisibility(View.GONE);
+				iv_re_name.setVisibility(View.GONE);
+				iv_re_psd.setVisibility(View.GONE);
+				iv_re_psd2.setVisibility(View.GONE);
 			}
 		});
 		bt_login.setOnClickListener(new OnClickListener() {
@@ -112,7 +154,8 @@ public class LoginActivity extends Activity {
 			public void onClick(View arg0) {
 				final String et_login_name = login_name.getText().toString();
 				final String et_login_psd = login_psd.getText().toString();
-				if (et_login_name.equals(" ") && et_login_psd.equals(" ")) {
+				if (TextUtils.isEmpty(et_login_name)
+						&& TextUtils.isEmpty(et_login_psd)) {
 					Toast.makeText(getApplicationContext(), "用户名和密码不能为空！", 1)
 							.show();
 				}
