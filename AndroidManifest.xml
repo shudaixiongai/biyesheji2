@@ -24,6 +24,11 @@
             android:name="com.example.piao.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name="com.example.piao.InActivity" >
         </activity>
@@ -32,11 +37,6 @@
         <activity android:name="com.example.piao.DetailsActivity" >
         </activity>
         <activity android:name="com.example.piao.LoginActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
