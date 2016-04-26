@@ -9,7 +9,6 @@ import com.bmob.btp.e.a.in;
 import com.example.piao.fragment.HomeFragment;
 import com.example.piao.fragment.HotFragment;
 import com.example.piao.fragment.MyFragment;
-import com.example.piao.fragment.UpdateFragment;
 
 import cn.bmob.v3.Bmob;
 import android.app.Activity;
@@ -62,13 +61,12 @@ public class MainActivity extends FragmentActivity {
 	private int bmWidth;
 	private FragmentManager manager;
 	private ViewPager viewPager;
-	private TextView tv_host, tv_hot, tv_update, tv_my;
+	private TextView tv_host, tv_hot, tv_my;
 	private String[] strings = new String[] { "首页", "登录", "注册", "发起投票", "设置",
 			"关于软件", "退出" };
 	private HomeFragment homeFragment;
 	private HotFragment hotFragment;
 	private MyFragment myFragment;
-	private UpdateFragment updateFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +75,6 @@ public class MainActivity extends FragmentActivity {
 		Bmob.initialize(this, APP_ID);
 		init();
 	}
-
 	private void init() {
 		drawerLayout = (DrawerLayout) findViewById(R.id.id_drawerlayout2);
 		drawerLayout.setDrawerListener(new DrawerListener() {
@@ -119,16 +116,13 @@ public class MainActivity extends FragmentActivity {
 		tv_host = (TextView) findViewById(R.id.tv_home);
 		tv_hot = (TextView) findViewById(R.id.tv_hot);
 		tv_my = (TextView) findViewById(R.id.tv_my);
-		tv_update = (TextView) findViewById(R.id.tv_update);
 		homeFragment = new HomeFragment();
 		hotFragment = new HotFragment();
 		myFragment = new MyFragment();
-		updateFragment = new UpdateFragment();
 		fragments = new ArrayList<Fragment>();
 		fragments.add(homeFragment);
 		fragments.add(hotFragment);
 		fragments.add(myFragment);
-		fragments.add(updateFragment);
 		initeCursor();
 		tv_host.setOnClickListener(new OnClickListener() {
 
@@ -151,13 +145,6 @@ public class MainActivity extends FragmentActivity {
 				viewPager.setCurrentItem(2);
 			}
 		});
-		tv_update.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				viewPager.setCurrentItem(3);
-			}
-		});
 		viewPager.setAdapter(new fragmentadapter(getSupportFragmentManager()));
 		viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
@@ -169,36 +156,27 @@ public class MainActivity extends FragmentActivity {
 						animation = new TranslateAnimation(
 								offSet * 2 + bmWidth, 0, 0, 0);
 					} else if (currentItem == 2) {
-						animation = new TranslateAnimation(offSet * 3 + 2
+						animation = new TranslateAnimation(offSet * 4 + 2
 								* bmWidth, 0, 0, 0);
 					}
 					break;
 
 				case 1:
 					if (currentItem == 0) {
-						animation = new TranslateAnimation(0, offSet * 3
+						animation = new TranslateAnimation(0, offSet * 2
 								+ bmWidth, 0, 0);
 					} else if (currentItem == 2) {
-						animation = new TranslateAnimation(5 * offSet + 2
-								* bmWidth, offSet * 5 + bmWidth, 0, 0);
+						animation = new TranslateAnimation(4 * offSet + 2
+								* bmWidth, offSet * 2 + bmWidth, 0, 0);
 					}
 					break;
 				case 2:
 					if (currentItem == 0) {
-						animation = new TranslateAnimation(0, 5 * offSet + 2
+						animation = new TranslateAnimation(0, 4 * offSet + 2
 								* bmWidth, 0, 0);
 					} else if (currentItem == 1) {
 						animation = new TranslateAnimation(
-								offSet * 2 + bmWidth, 5 * offSet + 2 * bmWidth,
-								0, 0);
-					}
-				case 3:
-					if (currentItem == 0) {
-						animation = new TranslateAnimation(0, 5 * offSet + 2
-								* bmWidth, 0, 0);
-					} else if (currentItem == 1) {
-						animation = new TranslateAnimation(
-								offSet * 2 + bmWidth, 5 * offSet + 2 * bmWidth,
+								offSet * 2 + bmWidth, 4 * offSet + 2 * bmWidth,
 								0, 0);
 					}
 				}
@@ -328,10 +306,10 @@ public class MainActivity extends FragmentActivity {
 	}
 
 	private void initeCursor() {
-		cursor = BitmapFactory.decodeResource(getResources(), R.drawable.a);
+		cursor = BitmapFactory.decodeResource(getResources(), R.drawable.next);
 		bmWidth = cursor.getWidth();
 		DisplayMetrics dm = getResources().getDisplayMetrics();
-		offSet = (dm.widthPixels - 4 * bmWidth) / 6;
+		offSet = (dm.widthPixels - 3 * bmWidth) / 6;
 		Log.i("widthPixels", String.valueOf(dm.widthPixels));
 		matrix.setTranslate(offSet, 0);
 		Log.i("offSet", String.valueOf(offSet));
