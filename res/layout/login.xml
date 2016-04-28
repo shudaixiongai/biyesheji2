@@ -16,16 +16,16 @@
             android:id="@+id/bt_login_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:text="Quick Login"
+            android:layout_marginLeft="65dp"
+            android:text="Login"
             android:textColor="#33D1a0" />
 
         <TextView
             android:id="@+id/bt_register_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:text="password Login"
+            android:layout_marginLeft="105dp"
+            android:text="Register"
             android:textColor="#33D1a0" />
     </LinearLayout>
 

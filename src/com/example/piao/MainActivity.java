@@ -34,9 +34,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -71,10 +74,13 @@ public class MainActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);// 去掉标题栏
 		setContentView(R.layout.main);
 		Bmob.initialize(this, APP_ID);
+
 		init();
 	}
+
 	private void init() {
 		drawerLayout = (DrawerLayout) findViewById(R.id.id_drawerlayout2);
 		drawerLayout.setDrawerListener(new DrawerListener() {
@@ -111,6 +117,17 @@ public class MainActivity extends FragmentActivity {
 		});
 		listView = (ListView) findViewById(R.id.id_lv);
 		listView.setAdapter(new adapter(MainActivity.this));
+		listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				if (arg2 == 0) {
+
+				}
+
+			}
+		});
 		viewPager = (ViewPager) findViewById(R.id.viewpager);
 		iv_srcol = (ImageView) findViewById(R.id.iv_sorl);
 		tv_host = (TextView) findViewById(R.id.tv_home);
