@@ -122,7 +122,10 @@ public class MainActivity extends FragmentActivity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				if (arg2 == 0) {
+				if (arg2 == 5) {
+					Intent intent = new Intent(MainActivity.this,
+							SettingActivity.class);
+					startActivity(intent);
 
 				}
 
@@ -314,7 +317,10 @@ public class MainActivity extends FragmentActivity {
 		maps.put("tv_item", "设置");
 		maps.put("iv_item", R.drawable.settings);
 		lists.add(maps);
-
+		maps = new HashMap<String, Object>();
+		maps.put("tv_item", "关于软件");
+		maps.put("iv_item", R.drawable.settings);
+		lists.add(maps);
 		maps = new HashMap<String, Object>();
 		maps.put("tv_item", "退出");
 		maps.put("iv_item", R.drawable.weather);

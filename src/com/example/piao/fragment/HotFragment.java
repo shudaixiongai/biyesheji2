@@ -12,7 +12,7 @@ public class HotFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.in, container, false);
+		View view = inflater.inflate(R.layout.viewpager_home, container, false);
 		return view;
 	}
 
